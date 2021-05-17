@@ -3,9 +3,9 @@ package repository;
 import config.ConnectionFactory;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 
 public class TestaListagem {
 
@@ -14,8 +14,8 @@ public class TestaListagem {
         ConnectionFactory connectionFactory = new ConnectionFactory();
         Connection connection = connectionFactory.reConnect();
 
-        Statement stm = connection.createStatement();
-        stm.execute("SELECT ID, nome, descricao FROM produto");
+        PreparedStatement stm = connection.prepareStatement("SELECT ID, nome, descricao FROM produto");
+        stm.execute();
 
         ResultSet rst = stm.getResultSet();
 
