@@ -1,14 +1,25 @@
 package config;
 
+import com.mchange.v2.c3p0.ComboPooledDataSource;
+
+import javax.sql.DataSource;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class ConnectionFactory {
 
-    public Connection reConnect() throws SQLException {
-        return DriverManager
-                .getConnection("jdbc:mysql://localhost/loja_virtual?useTimezone=true&serverTimezone=UTC", "root", "Bruno001.");
+    public DataSource dataSource;
+
+    public ConnectionFactory() {
+        ComboPooledDataSource comboPooledDataSource = new ComboPooledDataSource();
+        comboPooledDataSource.setJdbcUrl("jdbc:mysql://localhost/loja_virtual?useTimezone=true&serverTimezone=UTC");
+        comboPooledDataSource.setUser("root");
+        comboPooledDataSource.setPassword("Bruno001.");
+
+        this.dataSource = comboPooledDataSource;
     }
 
+    public Connection reConnect() throws SQLException {
+        return this.dataSource.getConnection();
+    }
 }
