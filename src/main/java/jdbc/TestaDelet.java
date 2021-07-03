@@ -1,4 +1,4 @@
-package repository;
+package jdbc;
 
 import config.ConnectionFactory;
 
@@ -14,7 +14,7 @@ public class TestaDelet {
         Connection connection = factory.reConnect();
 
         PreparedStatement stm = connection.prepareStatement("DELETE FROM PRODUTO WHERE ID > ?");
-        stm.setInt(1, 5);
+        stm.setInt(1, 12);
         stm.execute();
 
         Integer linhasModificadas = stm.getUpdateCount();

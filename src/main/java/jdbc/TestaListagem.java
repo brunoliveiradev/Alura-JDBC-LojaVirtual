@@ -1,4 +1,4 @@
-package repository;
+package jdbc;
 
 import config.ConnectionFactory;
 
